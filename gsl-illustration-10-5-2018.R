@@ -17,7 +17,7 @@ echo <- T
 
 cluster.dir <- "/Users/wxs/Dropbox/Clustering"
 libs.dir <- paste(cluster.dir, "A-Git-repos", "Cluster-libs", sep = "/")
-data.dir <- paste(cluster.dir, "Data", "Test-collection", sep = "/")
+data.dir <- paste(libs.dir, "Data", "Test-collection", sep = "/")
 
 source(paste(libs.dir, "gsl-functions-6-8-2018.R", sep = "/"), echo = echo)
 source(paste(libs.dir, "gsl-functions-for-figures-1-19-09.R", sep = "/"), echo = echo)
@@ -29,7 +29,7 @@ source(paste(libs.dir, "gsl-functions-for-figures-1-19-09.R", sep = "/"), echo =
 ## regions. Region 1 consists of areas 1..4, region 2 consists of
 ## areas 5 and 6, and region 3 consists of areas 7..9.
 ##
-## We will try to recover the areas and regions frm the measurements
+## We will try to recover the areas and regions from the measurements
 
 filename <- "olive.R"
 source(paste(data.dir, filename, sep = "/"), echo = echo)
@@ -49,7 +49,7 @@ table(group.id)
 ## spherical Gaussian kernel.
 
 ##-----------------------------------------------------------------
-## Let's first try the nearest neighbor estimate. We use the function
+## Let's first try the one-nearest-neighbor estimate. We use the function
 ## gsl.make.nn.mdsfun to generate a "minimum density similarity
 ## function" nn.mdsfun(i, j), which returns the minimum of the nearest
 ## neighbor density estimate over the edge (line segment) connecting
@@ -245,9 +245,11 @@ gsl.runt.size(gsl.cluster.out)[1:10]
 ## threshold. This means the pruned graph cluster tree will have 2
 ## internal nodes and 3 leaves. Let's compute the pruned tree.
 
-gsl.cluster.out <- gsl.cluster(X, nn.mdsfun, pruning.criterion =
-                               "size", pruning.threshold = 38)
+## gsl.cluster.out <- gsl.cluster(X, nn.mdsfun, pruning.criterion =
+##                                "size", pruning.threshold = 38)
 
+## Alternatively, 14 might be a reasonable threshold
+##
 gsl.cluster.out <- gsl.cluster(X, nn.mdsfun, pruning.criterion =
                                "size", pruning.threshold = 14)
 
