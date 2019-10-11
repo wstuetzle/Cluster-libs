@@ -101,6 +101,10 @@ gsl.runt.excess.mass <- function(gsl.cluster.out) {
   return(rev(sort((gsl.cluster.out$cluster.tree[, "runt.excess.mass"]))))
 }
 
+gsl.runt.rise <- function(gsl.cluster.out) {
+  return(rev(sort((gsl.cluster.out$cluster.tree[, "runt.rise"]))))
+}
+
 ## 2-26-2011
 gsl.runt.pruning.criterion <- function(gsl.cluster.out) {
   return(rev(sort((gsl.cluster.out$cluster.tree[, "runt.pruning.crit"]))))
@@ -892,7 +896,7 @@ gsl.knn.classifier <- function(X.train, y.train, X.test, kk = 1,
     ni <- sum(y.train==i)
     if (ni > 0) {weight[i] <- pi[i] * n.train / ni}
     else {weight[i] <- 1}
-  } Browser
+  } 
   for (block in 1:n.block) {
     i.start <- (block - 1) * block.size + 1
     i.end <- min(block * block.size, n.test)
